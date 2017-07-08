@@ -1,5 +1,54 @@
 body{
   padding: 0;
   margin: 0;
+}
+
+.container{
+  padding: 5px;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+$LIGHT: 300;
+$MEDIUM: 400;
+$BOLD: 700;
+
+.field-input{
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 8px;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid #e3e3e3;
+  font-size: 22px;
+
+  &:focus{
+    border: 1px solid #444;
+  }
+}
+
+.suggest-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  border-bottom: .5px solid #e3e3e3;
+  border-left: .5px solid #e3e3e3;
+  border-right: .5px solid #e3e3e3;
+  display: none;
+}
+
+.suggest-list-visible{
+  display: block;
+}
+
+.suggest-item{
+  padding: 17px 8px;
+  font-weight: $LIGHT;
+
+  &+.selected{
+    font-weight: $MEDIUM;
+    background-color: #e3e3e3;
+  }
 }
