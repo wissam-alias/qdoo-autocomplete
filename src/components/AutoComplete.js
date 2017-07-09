@@ -30,7 +30,10 @@ class AutoComplete extends React.Component {
         });
     }
 
-    _handleClick(value) {
+    _handleClick(key, value) {
+        this.state.suggestions.forEach((suggestion) => { suggestion.active = false; });
+        this.state.suggestions[key].active = true;
+
         this.setState({
             value: value
         });
@@ -46,7 +49,12 @@ class AutoComplete extends React.Component {
 
     search(input) {
         this.setState({
-            suggestions: this.props.suggestionsProvider(input)
+            suggestions: this.props.suggestionsProvider(input).map((item) => {
+                return {
+                    value: item,
+                    active: false
+                };
+            })
         });
     }
 

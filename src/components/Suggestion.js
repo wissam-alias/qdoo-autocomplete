@@ -8,13 +8,13 @@ class Suggestion extends React.Component {
     }
 
     render() {
-        const { item, handleClick } = this.props;
+        const { index, item, handleClick } = this.props;
 
         return (
             <li
-                key={ item }
+                key={ index }
                 className="suggest-item"
-                onClick={ () => handleClick(item) }
+                onClick={ () => handleClick(index, item) }
             >
                 { item }
             </li>
