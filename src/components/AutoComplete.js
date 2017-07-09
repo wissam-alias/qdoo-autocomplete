@@ -16,19 +16,23 @@ class AutoComplete extends React.Component {
             suggestions: []
         };
 
-        this.search = debounce(this, this.search, 500);
+        // @Todo: Expose debouce delay as component prop / option?
+        this.search = debounce(this, this.search, 400);
     }
 
     /**
+     * Retrieves the next suggestion in the suggestions list
      *
      * @returns {Object}
-     * @Todo: Refactor this + Move out of component
+     *
+     * @Todo: Refactor this, split into sub-routines & Move out of component
      */
     next() {
         const { suggestions } = this.state;
         if (suggestions.length === 0) {
             return null;
         }
+
         // find selected item
         let activeSuggestionIndex = -1;
         for (let i = 0; i < suggestions.length; i++) {
@@ -48,24 +52,41 @@ class AutoComplete extends React.Component {
             next = 0;
         }
 
+        // @Todo: Refactor
         suggestions.forEach((suggestion) => { suggestion.active = false; });
         suggestions[next].active = true;
         return suggestions[next];
     }
 
+    /**
+     * Handles keyboard interaction
+     *
+     * @param {SyntheticEvent} ev
+     * @private
+     */
     _handleKeyDown(ev) {
         const key = ev.which;
 
+        // Case: Arrow Down
         if (key === 40) {
             this.setState({
                 value: this.next().value
             });
         }
+
+        // Case: Arrow Up
+        if (key === 38) {
+            // @Todo: Handle Key Up Case
+        }
     }
 
+    /**
+     * Handles input value changes
+     *
+     * @param {SyntheticEvent} ev
+     * @private
+     */
     _handleChange(ev) {
-        console.log('_handleChange');
-
         this.setState({
             value: ev.target.value
         });
@@ -73,12 +94,25 @@ class AutoComplete extends React.Component {
         this.search(ev.target.value);
     }
 
+    /**
+     * Handles mouse focus behavior on input
+     *
+     * @param {SyntheticEvent} ev
+     * @private
+     */
     _handleFocusBehavior(ev) {
         this.setState({
             focused: true
         });
     }
 
+    /**
+     * Handles click over a suggestion
+     *
+     * @param {int} key
+     * @param {string} value
+     * @private
+     */
     _handleClick(key, value) {
         // @Todo: Refactor + Move out of component
         const { suggestions } = this.state;
@@ -90,6 +124,12 @@ class AutoComplete extends React.Component {
         });
     }
 
+    /**
+     * Handles lose focus / blur of component
+     *
+     * @param {SyntheticEvent} ev
+     * @private
+     */
     _handleBlur(ev) {
         setTimeout(() => {
             this.setState({
@@ -98,6 +138,11 @@ class AutoComplete extends React.Component {
         }, 300);
     }
 
+    /**
+     * Constructs state suggestion list
+     *
+     * @param {string} input
+     */
     search(input) {
         this.setState({
             suggestions: this.props.suggestionsProvider(input).map((item) => {

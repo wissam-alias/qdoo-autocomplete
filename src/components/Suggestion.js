@@ -1,32 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-class Suggestion extends React.Component {
+const Suggestion = ({ index, item, active, handleClick }) => {
 
-    constructor() {
-        super();
-    }
+    const className = 'suggest-item' + ( active ? ' suggest-item-active' : '' );
 
-    render() {
-        const { index, item, active, handleClick } = this.props;
-
-        const className = 'suggest-item' + ( active ? ' suggest-item-active' : '' );
-
-        return (
-            <li
-                key={ index }
-                className={ className }
-                onClick={ () => handleClick(index, item) }
-            >
-                { item }
-            </li>
-        );
-    }
-
-}
-
-Suggestion.propTypes = {
-    handleClick: PropTypes.func.isRequired
+    return (
+        <li
+            key={ index }
+            className={ className }
+            onClick={ () => handleClick(index, item) }
+        >
+            { item }
+        </li>
+    )
 };
 
 export default Suggestion;

@@ -9,6 +9,8 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+$LIGHT_GRAY: #e3e3e3;
+
 $LIGHT: 300;
 $MEDIUM: 400;
 $BOLD: 700;
@@ -20,7 +22,7 @@ $BOLD: 700;
   padding: 20px 8px;
   outline: none;
   font-family: 'Roboto', sans-serif;
-  border: 1px solid #e3e3e3;
+  border: 1px solid ;
   font-size: 22px;
 
   &:focus{
@@ -33,9 +35,9 @@ $BOLD: 700;
   margin: 0;
   padding: 0;
   font-size: 18px;
-  border-bottom: .5px solid #e3e3e3;
-  border-left: .5px solid #e3e3e3;
-  border-right: .5px solid #e3e3e3;
+  border-bottom: .5px solid $LIGHT_GRAY;
+  border-left: .5px solid $LIGHT_GRAY;
+  border-right: .5px solid $LIGHT_GRAY;
   display: none;
 }
 
@@ -50,12 +52,12 @@ $BOLD: 700;
   &:hover{
     cursor: pointer;
     font-weight: $MEDIUM;
-    background-color: #e3e3e3;
+    background-color: $LIGHT_GRAY;
   }
 }
 
 .suggest-item-active{
   cursor: pointer;
   font-weight: $MEDIUM;
-  background-color: #e3e3e3;
+  background-color: $LIGHT_GRAY;
 }
