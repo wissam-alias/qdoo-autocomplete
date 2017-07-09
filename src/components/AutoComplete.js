@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input from './Input';
 import SuggestionsBox from './SuggestionsBox';
+import { debounce } from '../utilities';
 
 class AutoComplete extends React.Component {
 
@@ -14,6 +15,8 @@ class AutoComplete extends React.Component {
             focused: false,
             suggestions: []
         };
+
+        this.search = debounce(this, this.search, 500);
     }
 
     /**
@@ -61,6 +64,8 @@ class AutoComplete extends React.Component {
     }
 
     _handleChange(ev) {
+        console.log('_handleChange');
+
         this.setState({
             value: ev.target.value
         });
