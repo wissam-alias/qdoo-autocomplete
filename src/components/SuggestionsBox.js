@@ -1,4 +1,5 @@
 import React from 'react';
+import Suggestion from './Suggestion';
 
 class SuggestionsBox extends React.Component {
 
@@ -10,7 +11,10 @@ class SuggestionsBox extends React.Component {
         const { suggestions, visible } = this.props;
 
         const suggestionsList = suggestions.map((item) => (
-            <li key={ item } className="suggest-item">{ item }</li>
+            <Suggestion
+                key={ item }
+                item={ item }
+            />
         ));
 
         return (
