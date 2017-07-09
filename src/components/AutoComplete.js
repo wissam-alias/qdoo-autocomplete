@@ -9,32 +9,42 @@ class AutoComplete extends React.Component {
         super();
 
         this.state = {
+            value: '',
             focused: false,
             suggestions: []
         };
     }
 
     _handleChange(ev) {
-        console.log('_handleChange');
+        this.setState({
+            value: ev.target.value
+        });
+
         this.search(ev.target.value);
     }
 
-    _handleFocus(ev) {
-        console.log('_handleFocus');
+    _handleFocusBehavior(ev) {
         this.setState({
             focused: true
         });
     }
 
-    _handleBlur(ev) {
-        console.log('_handleBlur');
+    _handleClick(value) {
         this.setState({
-            focused: false
+            value: value
         });
     }
 
+    _handleBlur(ev) {
+        setTimeout(() => {
+            this.setState({
+               focused: false
+            });
+        }, 300);
+    }
+
     search(input) {
-        const wordBank = ['item1', 'item2', 'item3'];
+        const wordBank = ['item0', 'item1', 'item2', 'item3', 'item123'];
 
         this.setState({
             suggestions: input
@@ -46,19 +56,20 @@ class AutoComplete extends React.Component {
     }
 
     render() {
-        const { suggestions, focused } = this.state;
+        const { value, focused, suggestions } = this.state;
 
         return (
-            <div className="field">
+            <div className="field" onBlur={ this._handleBlur.bind(this) }>
                 <Input
                     placeholder="Yo! Type some ..."
+                    valueText={ value }
                     handleChange={ this._handleChange.bind(this) }
-                    handleFocus={ this._handleFocus.bind(this) }
-                    handleBlur={ this._handleBlur.bind(this) }
+                    handleFocus={ this._handleFocusBehavior.bind(this) }
                 />
                 <SuggestionsBox
                     visible={ focused }
                     suggestions={ suggestions }
+                    handleClick={ this._handleClick.bind(this) }
                 />
             </div>
         );

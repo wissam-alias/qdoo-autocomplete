@@ -47,7 +47,8 @@ $BOLD: 700;
   padding: 17px 8px;
   font-weight: $LIGHT;
 
-  &+.selected{
+  &:hover{
+    cursor: pointer;
     font-weight: $MEDIUM;
     background-color: #e3e3e3;
   }

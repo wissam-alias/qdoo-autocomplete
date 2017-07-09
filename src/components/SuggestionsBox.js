@@ -8,17 +8,20 @@ class SuggestionsBox extends React.Component {
     }
 
     render() {
-        const { suggestions, visible } = this.props;
+        const { suggestions, visible, handleClick } = this.props;
+
+        const className = 'suggest-list ' + ( visible ? ' suggest-list-visible' : '' );
 
         const suggestionsList = suggestions.map((item) => (
             <Suggestion
                 key={ item }
                 item={ item }
+                handleClick={ handleClick }
             />
         ));
 
         return (
-            <ul className={ 'suggest-list ' + ( visible ? ' suggest-list-visible' : '' ) }>
+            <ul className={ className }>
                 { suggestionsList }
             </ul>
         );

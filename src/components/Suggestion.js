@@ -12,10 +12,10 @@ class Suggestion extends React.Component {
         return (
             <li
                 key={ item }
-                onClick={ handleClick }
                 className="suggest-item"
+                onClick={ () => handleClick(item) }
             >
-                <a href="">{ item }</a>
+                { item }
             </li>
         );
     }
