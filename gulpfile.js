@@ -4,6 +4,7 @@ var source = require("vinyl-source-stream");
 var reactify = require('reactify');
 var babelify = require('babelify');
 var sass = require('gulp-sass');
+var gutil = require('gulp-util');
 
 gulp.task('js:build', function() {
     return browserify({
@@ -17,20 +18,15 @@ gulp.task('js:build', function() {
         })
         .transform(reactify)
         .bundle()
-        .on('error', function() {
-            var msg = error.codeFrame.replace(/\n/g, '\n    ');
-            gutil.log('|- ' + gutil.colors.bgRed.bold('Build Error in ' + error.plugin));
-            gutil.log('|- ' + gutil.colors.bgRed.bold(error.message));
-            gutil.log('|- ' + gutil.colors.bgRed('>>>'));
-            gutil.log('|\n    ' + msg + '\n           |');
-            gutil.log('|- ' + gutil.colors.bgRed('<<<'));
+        .on('error', function (error) {
+            console.log(error);
         })
         .pipe(source('main.js'))
         .pipe(gulp.dest('./public/build'));
 });
 gulp.task('js:watch', function() {
-    gulp.watch('src/**/*.js', ['browserify']);
-    gulp.watch('src/**/*.jsx', ['browserify']);
+    gulp.watch('src/**/*.js', ['js:build']);
+    gulp.watch('src/**/*.jsx', ['js:build']);
 });
 
 gulp.task('sass', function() {
