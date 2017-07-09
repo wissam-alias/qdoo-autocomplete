@@ -7,11 +7,15 @@ class SuggestionsBox extends React.Component {
     }
 
     render() {
+        const { suggestions, visible } = this.props;
+
+        const suggestionsList = suggestions.map((item) => (
+            <li key={ item } className="suggest-item">{ item }</li>
+        ));
+
         return (
-            <ul className="suggest-list suggest-list-visible">
-                <li className="suggest-item">Suggestion 01</li>
-                <li className="suggest-item selected">Suggestion 02</li>
-                <li className="suggest-item">Suggestion 03</li>
+            <ul className={ 'suggest-list ' + ( visible ? ' suggest-list-visible' : '' ) }>
+                { suggestionsList }
             </ul>
         );
     }

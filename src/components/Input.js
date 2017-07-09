@@ -7,8 +7,16 @@ class Input extends React.Component {
     }
 
     render() {
+        const { placeholder, handleChange, handleFocus, handleBlur } = this.props;
         return (
-            <input type="text" placeholder="Start typing ..." className="field-input" />
+            <input
+                type="text"
+                placeholder={ placeholder }
+                className="field-input"
+                onChange={ handleChange }
+                onFocus={ handleFocus }
+                onBlur={ handleBlur }
+            />
         );
     }
 
