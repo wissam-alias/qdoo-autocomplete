@@ -53,3 +53,9 @@ $BOLD: 700;
     background-color: #e3e3e3;
   }
 }
+
+.suggest-item-active{
+  cursor: pointer;
+  font-weight: $MEDIUM;
+  background-color: #e3e3e3;
+}

@@ -8,13 +8,15 @@ class Input extends React.Component {
     }
 
     render() {
-        const { placeholder, valueText, handleChange, handleFocus } = this.props;
+        const { placeholder, valueText, handleKeyDown, handleChange, handleFocus } = this.props;
+
         return (
             <input
                 type="text"
                 placeholder={ placeholder }
                 value={ valueText }
                 className="field-input"
+                onKeyDown={ handleKeyDown }
                 onChange={ handleChange }
                 onMouseDown={ handleFocus }
             />

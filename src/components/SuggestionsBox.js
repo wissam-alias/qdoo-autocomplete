@@ -13,13 +13,13 @@ class SuggestionsBox extends React.Component {
         const className = 'suggest-list ' + ( visible ? ' suggest-list-visible' : '' );
 
         const suggestionsList = [];
-
         for (let i = 0; i < suggestions.length; i++) {
             suggestionsList.push(
                 <Suggestion
                     key={ i }
                     index={ i }
                     item={ suggestions[i].value }
+                    active={ suggestions[i].active }
                     handleClick={ handleClick }
                 />
             );

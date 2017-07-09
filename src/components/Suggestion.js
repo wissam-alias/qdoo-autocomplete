@@ -8,12 +8,14 @@ class Suggestion extends React.Component {
     }
 
     render() {
-        const { index, item, handleClick } = this.props;
+        const { index, item, active, handleClick } = this.props;
+
+        const className = 'suggest-item' + ( active ? ' suggest-item-active' : '' );
 
         return (
             <li
                 key={ index }
-                className="suggest-item"
+                className={ className }
                 onClick={ () => handleClick(index, item) }
             >
                 { item }

@@ -16,6 +16,50 @@ class AutoComplete extends React.Component {
         };
     }
 
+    /**
+     *
+     * @returns {Object}
+     * @Todo: Refactor this + Move out of component
+     */
+    next() {
+        const { suggestions } = this.state;
+        if (suggestions.length === 0) {
+            return null;
+        }
+        // find selected item
+        let activeSuggestionIndex = -1;
+        for (let i = 0; i < suggestions.length; i++) {
+            if (suggestions[i].active) {
+                activeSuggestionIndex = i;
+            }
+        }
+
+        let next = 0;
+        if (activeSuggestionIndex == -1) {
+            next = 0;
+        }
+        else if (activeSuggestionIndex < suggestions.length - 1) {
+            next = activeSuggestionIndex + 1;
+        }
+        else {
+            next = 0;
+        }
+
+        suggestions.forEach((suggestion) => { suggestion.active = false; });
+        suggestions[next].active = true;
+        return suggestions[next];
+    }
+
+    _handleKeyDown(ev) {
+        const key = ev.which;
+
+        if (key === 40) {
+            this.setState({
+                value: this.next().value
+            });
+        }
+    }
+
     _handleChange(ev) {
         this.setState({
             value: ev.target.value
@@ -31,8 +75,10 @@ class AutoComplete extends React.Component {
     }
 
     _handleClick(key, value) {
-        this.state.suggestions.forEach((suggestion) => { suggestion.active = false; });
-        this.state.suggestions[key].active = true;
+        // @Todo: Refactor + Move out of component
+        const { suggestions } = this.state;
+        suggestions.forEach((suggestion) => { suggestion.active = false; });
+        suggestions[key].active = true;
 
         this.setState({
             value: value
@@ -66,6 +112,7 @@ class AutoComplete extends React.Component {
                 <Input
                     placeholder="Yo! Type some ..."
                     valueText={ value }
+                    handleKeyDown={ this._handleKeyDown.bind(this) }
                     handleChange={ this._handleChange.bind(this) }
                     handleFocus={ this._handleFocusBehavior.bind(this) }
                 />
