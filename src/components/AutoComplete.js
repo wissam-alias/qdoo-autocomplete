@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Input from './Input';
 import SuggestionsBox from './SuggestionsBox';
@@ -44,14 +45,8 @@ class AutoComplete extends React.Component {
     }
 
     search(input) {
-        const wordBank = ['item0', 'item1', 'item2', 'item3', 'item123'];
-
         this.setState({
-            suggestions: input
-                ? wordBank.filter((word) => {
-                    return word.indexOf(input) > -1;
-                })
-                : []
+            suggestions: this.props.suggestionsProvider(input)
         });
     }
 
@@ -76,5 +71,13 @@ class AutoComplete extends React.Component {
     }
 
 }
+
+AutoComplete.propTypes = {
+    suggestionsProvider: PropTypes.func
+};
+
+AutoComplete.defaultProps = {
+    suggestionsProvider: () => []
+};
 
 export default AutoComplete;

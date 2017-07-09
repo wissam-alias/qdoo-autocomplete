@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Suggestion extends React.Component {
 
@@ -21,5 +22,9 @@ class Suggestion extends React.Component {
     }
 
 }
+
+Suggestion.propTypes = {
+    handleClick: PropTypes.func.isRequired
+};
 
 export default Suggestion;
